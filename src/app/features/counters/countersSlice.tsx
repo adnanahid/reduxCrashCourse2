@@ -20,11 +20,20 @@ const countersSlice = createSlice({
   name: "counters",
   initialState,
   reducers: {
-    increment: (state, action:PayloadAction<number>)=>{
-
+    increment: (state, action: PayloadAction<number>) => {
+      const counter = state.find((c) => c.id === action.payload);
+      if (counter) {
+        counter.value++;
+      }
     },
-    decrement: (state, action:PayloadAction<number>)=>{
-
-    }
-  }
+    decrement: (state, action: PayloadAction<number>) => {
+      const counter = state.find((c) => c.id === action.payload);
+      if (counter) {
+        counter.value--;
+      }
+    },
+  },
 });
+
+export const { increment, decrement } = countersSlice.actions;
+export default countersSlice.reducer;
