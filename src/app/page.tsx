@@ -1,41 +1,25 @@
-
-import { useSelector } from "react-redux";
+"use client";
+import { useSelector, useDispatch } from "react-redux";
 import State from "./components/State";
 import Counter from "./components/Counters";
-
+import { increment, decrement } from "./features/counters/countersSlice";
+import { RootState } from "./store";
 
 export default function Home() {
-  const counters = useSelector((state)=> state.counters)
+  const dispatch = useDispatch();
+  const counters = useSelector((state: RootState) => state.counters);
 
   const totalValue = counters.reduce(
     (initial, current) => initial + current.value,
     0
   );
 
-  const handleIncrement = (counterId) => {
-    const updatedCounter = counters.map((counter) => {
-      if (counter.id === counterId) {
-        return {
-          ...counter,
-          value: counter.value + 1,
-        };
-      }
-      return counter;
-    });
-    setCounters(updatedCounter);
+  const handleIncrement = (id: number) => {
+    dispatch(increment(id));
   };
 
-  const handleDecrement = (counterId) => {
-    const updatedCounter = counters.map((counter) => {
-      if (counter.id === counterId) {
-        return {
-          ...counter,
-          value: counter.value - 1,
-        };
-      }
-      return counter;
-    });
-    setCounters(updatedCounter);
+  const handleDecrement = (id: number) => {
+    dispatch(decrement(id));
   };
 
   return (
