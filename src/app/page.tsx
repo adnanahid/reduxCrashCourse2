@@ -10,7 +10,7 @@ import { Calendar } from "@/components/ui/calendar";
 export default function Home() {
   const counters = useSelector((state: RootState) => state.counters);
   const dispatch = useDispatch();
-  const [date, setDate] = useState<Date | undefined>(new Date()); // ✅ useState ঠিক করা হয়েছে
+  const [date, setDate] = useState<Date | undefined>(new Date());
 
   const totalValue = counters.reduce(
     (initial, current) => initial + current.value,
