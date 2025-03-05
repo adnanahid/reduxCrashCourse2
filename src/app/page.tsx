@@ -1,16 +1,14 @@
 "use client";
-import React, { useState } from "react"; // ✅ React import করা হয়েছে
+import React from "react"; // ✅ React import করা হয়েছে
 import { useSelector, useDispatch } from "react-redux";
 import State from "./components/State";
 import Counter from "./components/Counters";
 import { increment, decrement } from "./features/counters/countersSlice";
 import { RootState } from "./store";
-import { Calendar } from "@/components/ui/calendar";
 
 export default function Home() {
   const counters = useSelector((state: RootState) => state.counters);
   const dispatch = useDispatch();
-  const [date, setDate] = useState<Date | undefined>(new Date());
 
   const totalValue = counters.reduce(
     (initial, current) => initial + current.value,
@@ -38,14 +36,6 @@ export default function Home() {
               onDecrement={() => handleDecrement(counter.id)}
             />
           ))}
-        </div>
-        <div>
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            className="rounded-md border bg-black text-white w-64"
-          />
         </div>
       </div>
     </div>
